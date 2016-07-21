@@ -31,48 +31,59 @@
 	</head>
 	<!--<body style="margin: 0px;">-->
 	<body>
-		<header id="header">
+		<!--<header id="header">
 			<h1 id="heading">Header Here</h1>
-		</header>		
+		</header>-->
+		<div id="header">
+			<h1 id="heading">Header Here</h1>
+		</div>
 
-		<div class="navBar">
+		<div id="navBar">
 			<ul>
+<!--				<span id="home"><li onclick="populateHomeScreen()">Home</li></span>				
+				<span id="rooms"><li onclick="populateRoomSpecificControls()">Rooms</li></span>
+				<span><li>Housewide Controls</li></span>
+				<span><li>CCTV</li></span>				
+				<span><li>Settings</li></span>				
+-->				
 				<li id="home" onclick="populateHomeScreen()">Home</li>				
 				<li id="rooms" onclick="populateRoomSpecificControls()">Rooms</li>
-				<li id="housewideControls">Housewide Controls</li>
-				<li id="cctv">CCTV</li>				
-				<li id="Settings">Settings</li>				
+				<li>Housewide Controls</li>
+				<li>CCTV</li>				
+				<li>Settings</li>
 			</ul>
 		</div>
 
-		<section>
-			<!-- a place holder for HTML content to be created via JavaScript -->
-			<div id="output"></div>	
-		</section>
-
-		<aside>
-			<div id="sideBar">
-				<div id="currentStatus">
-					<h2>Curent Status</h2>	
-					<div id="currentStatusContent">
-					Current status content
-					</div>
+		<!--<aside>-->
+		<div id="sideBar">
+			<div id="currentStatus">
+				<h3>Curent Status</h3>	
+				<div id="currentStatusContent">				
 				</div>
+			</div>
 
-				<div id="activeRooms">
-					<h2>Active Rooms</h2>					
-					<div id="activeRoomContent">
-					Active Room Content
-					</div>
+			<div id="activeRooms">
+				<h3>Active Rooms</h3>					
+				<div id="activeRoomContent">				
 				</div>
-			</div>			
-		</aside>		
-		
-		<!--
-		<footer>			
+			</div>
+		</div>			
+		<!--</aside>-->
+
+		<div id="sectionWrapper">
+			<center>
+			<div id="section">
+			<!--<section>-->
+				<!-- a place holder for HTML content to be created via JavaScript -->
+				<div id="output"></div>	
+			<!--</section>-->
+			</div>
+			<center>
+		</div>
+			
+		<div id="footer">			
 			ver.1.0
-		</footer>
-		-->
+		</div>		
 
 	</body>
 

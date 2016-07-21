@@ -7,93 +7,100 @@
 
  body {
  	background-color: #DFE3EE;
+ 	font-family: sans-serif;
  }
- header {
+ #header {
  	background-color:#3B5998;
  	color:white;
  	text-align:center;
  	padding:5px;
  }
-/* horizontal list with effects */ 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-	margin:		20px;	/* spaces OUTSIDE */	
-	padding: 	0;		/* spaces INSIDE */  	
-}
-
-li {
-    float: left;	
-	display: block;
-    width: 300px;
-    font-weight: bold;
-	color: blue;
-	background-color: white;
-    text-align: center;
-    padding: 4px;
-    text-decoration: none;
-    text-transform: uppercase;
-	
-}
-
-li:hover, li:active, li:visited {
-	background-color: rgba(0,0,255,0.3);
-} 
-/*nav {
-	line-height:30px;
-	background-color:#eeeeee;
-	height:300px;
-	width:100px;
-	float:left;
-	padding:5px; 
-	}*/
-
-.navBar {
-	list-style-type: none;				
+#navBar {
+	/*list-style-type: none;				*/
+	display: inline;
 	background-color: #F7F7F7;				
-	color: #3B5998;
 	margin: 0;
 	padding: 0;
+	border-color: #B3B3B3;	
+	border-width: 5px;
 }
-section {
+#navBar ul {
+	list-style-type: none;
+	position: relative;
+	top: 1px;
+	overflow: hidden;
+	background-color: #F7F7F7;
+	border-color: #B3B3B3;	
+	border-width: 5px;	
+}
+#navBar li{
+	float: left;
+	display: block;
+	color: #3B5998;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	border-right: 1px solid #D3D3D3;
+}
+#navBar li:last-child {
+	border-right: none;
+	/*border-right: 1px solid #b3b3A3;*/
+}
+#navBar li:hover:not(.active) {
+	background-color: #8B9DC3;
+}
+/*
+#navBar li:active {
+	background-color: #8B9DC3;
+}
+*/
+.active {
+	/*background-color: #4CAF50;*/
+	border-bottom: blue;
+}
+#sectionWrapper {
+	background-color: #F7F7F7;
+	/*width: 900px;*/
+	height: 600px;
+	/*float: right;*/
+	margin-left: 205px;
+}
+#section {
 	/*width:350px;*/				
 	float: center;
 	padding:10px; 
 }
-footer {
-	background-color:black;
-	color:white;
-	clear:both;
-	text-align:center;
-	/*text-align:right;*/
-	padding:5px; 
-
-	/*to keep it at the bottom*/
-	/*position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;*/
-}
-aside {
+#aside {
 	display: block;
 	float: right;						
 }
 
 #sideBar {
-	padding-right: 10px;
+	float: left;
+	width: 200px;
+	height: 600px;
+	background-color: #F7F7F7;	
 }
 
 #currentStatus, #activeRooms {
+	padding-right: 20px; /*10px;*/
+	padding-left: 20px;
+	padding-bottom: 20px;
 	background-color: #F7F7F7;
 	color: #3B5998;	
-
 }
-#currentStatusContent, #activeRoomContent {
+#currentStatusContent {	
 	background-color: #F7F7F7;								
 	color: #262626;
 }
+#activeRoomContent {
+	background-color: #F7F7F7;								
+	color: #262626;
+}
+#activeRooms {
+	border-top: 1px solid #D3D3D3;
+}
+
 .homeScreenButtons {
 	width: 100%;
 	height: 100%;				
@@ -115,7 +122,24 @@ aside {
 	width: 20px;
 	margin: 0px;
 }
+#footer {
+	position: fixed;
+	bottom: 5px;
+	width: 100%;	
 
+	background-color: #3B5998;
+	color:white;
+	clear:both;
+	text-align:center;
+	/*text-align:right;*/
+	padding:5px; 
+
+	/*to keep it at the bottom*/
+	/*position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;*/
+}
 /* THE FOLLOWING IS FOR THE ROOM CONTROL SLIDER/SWITCH ONLY 
  *	ref. http://www.w3schools.com/jquerymobile/tryit.asp?filename=tryjqmob_forms_select_switch
  * ---------------------------------------------------------
