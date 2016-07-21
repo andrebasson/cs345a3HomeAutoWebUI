@@ -6,13 +6,13 @@
  */
 
 /* 
- * populateHomeScreen() populates homescreen content (4 buttons) 
+ * populateHomeScreen() populates the home screen content (4 buttons) and header
  */ 
 function populateHomeScreen() {
 	var outputContent = "<input class='homeScreenButtons' type='button' name='rsc'"
-					+ "value='Room Specific Controls'></input>"
+					+ "value='Room Specific Controls' onclick='populateRoomSpecificControls()'></input>"
 					+ "<input class='homeScreenButtons' type='button' name='hwc'"
-					+ "value='Housewide Controls'></input>"
+					+ "value='Housewide Controls'></input><br>"
 					+ "<input class='homeScreenButtons' type='button' name='cctv'"
 					+ "value='CCTV'></input>"
 					+ "<input class='homeScreenButtons' type='button' name='settings'"
@@ -21,18 +21,46 @@ function populateHomeScreen() {
 	document.getElementById("heading").innerHTML = "Liz's House";
 }
 
+/* 
+ * populateRoomSpecificControlsScreen() populates the 'rooms' screen content (4 buttons) and header
+ */ 
+function populateRoomSpecificControls(){
+	var outputContent = "<input class='roomsScreenButtons' type='button' name='lng'"
+					+ "value='Lounge'></input>"
+					+ "<input class='roomsScreenButtons' type='button' name='ktn'"
+					+ "value='Kitchen'></input>"
+					+ "<input class='roomsScreenButtons' type='button' name='bthrm1'"
+					+ "value='Bathroom 1'></input><br>"
+					+ "<input class='roomsScreenButtons' type='button' name='bthrm2'"
+					+ "value='Bathroom 2'></input>"					
+					+ "<input class='roomsScreenButtons' type='button' name='bdrm1'"
+					+ "value='Bedroom 1'></input>"
+					+ "<input class='roomsScreenButtons' type='button' name='bdrm2'"
+					+ "value='Bedroom 2'></input>";					
+	document.getElementById("output").innerHTML = outputContent;
+	document.getElementById("heading").innerHTML = "Rooms";
+}
+
+
 /*
  * updateSideBar() populates or updates the Current Status / Active Rooms sidebar content
  */
 function updateSideBar(){	
 	var currentStatus = getCurrentStatus();
 	var currentStatusDiv = document.getElementById("currentStatusContent");	
-	currentStatusDiv.innerHTML = "<strong>Alarms</strong>&nbsp&nbsp&nbsp&nbsp&nbsp"+currentStatus[0]+"<br>"
-								+"<strong>Doors</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+currentStatus[1]+"<br>"
-								+"<strong>Energy</strong>&nbsp&nbsp&nbsp&nbsp"+currentStatus[2]+"<br>"
-								+"<strong>Temp</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+currentStatus[3];
-	var activeRoomsOutput = "Lounge";
-
+	currentStatusDiv.innerHTML = "<strong>Alarms</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+currentStatus[0]+"<br>"
+								+"<strong>Doors</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+currentStatus[1]+"<br>"
+								+"<strong>Energy</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+currentStatus[2]+"<br>"
+								+"<strong>Temp</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+currentStatus[3];
+	
+	var activeRoomsByIndexArray = getActiveRooms(rooms);
+	var activeRoomsOutput = "";
+	for (var i=0; i<activeRoomsByIndexArray.length; i++){		
+		//console.log("Active Room: "+rooms[activeRoomsByIndexArray[i]].getName());
+		var activeRoom = rooms[activeRoomsByIndexArray[i]];
+		activeRoomsOutput += "<strong>"+activeRoom.getName()+"</strong>"+getActivities(activeRoom)+"<br>";
+	}
+	document.getElementById("activeRoomContent").innerHTML=activeRoomsOutput;
 }
 
 /*
@@ -116,6 +144,24 @@ function getActiveRooms(rooms){
 	}
 	return activeRoomsByIndexArray;
 }
+
+/*
+ *  returns the activities currently active (in 'on' state) in a room, as HTML
+ */
+function getActivities(room){
+	var outputStringHTML = "";
+	if (room.getLightState() == true){
+		outputStringHTML += "<img class='imgLight' src='images/light-on2.png' alt='light img'>&nbsp"
+	} else if (room.getHeatingState()){
+		outputStringHTML += "<img class='imgThermometre' src='images/thermometre-up.png' alt='light img'>&nbsp"
+	} else if (room.getDoorLockState()){
+		outputStringHTML += "<img class='imgLock' src='images/lock-open.png' alt='light img'>&nbsp"
+	} else if (getWindowBlindState()){
+		outputStringHTML += "<img class='imgBlinds' src='images/blinds-closed.png' alt='light img'>&nbsp"
+	} 
+	return outputStringHTML;
+}
+
 
 
 

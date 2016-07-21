@@ -12,7 +12,7 @@
 
 		<script>
 			// stored variables (for the duration of the browser session) to mimick system status
-			var currentStatus = ["On","Locked","1.24kWh","23°C"];			
+			var currentStatus = ["On","Locked","1.24kWh","23C"];			
 			sessionStorage.setItem("currentStatusStore",JSON.stringify(currentStatus));
 
 			// create some rooms
@@ -23,23 +23,11 @@
 			rooms.push(createRoom('Bathroom 2'));
 			rooms.push(createRoom('Bedroom 1'));
 			rooms.push(createRoom('Bedroom 2'));			
-			//debug			
-//			for (var x=0; x<rooms.length; x++ ){
-//				console.log("Room added: "+rooms[x].getName());
-//			}
 
 			// set some states
 			rooms[0].setHeatingState(true);		// switch heating on in the Lounge 
 			rooms[2].setLightState(true);		// switch the lights on in bathroom 1			
-			// debug
-//			console.log(rooms[0].getName()+": "+rooms[0].getHeatingState());
-//			console.log(rooms[2].getName()+": "+rooms[2].getLightState());
 
-			var activeRoomsByIndexArray = getActiveRooms(rooms);
-			//debug
-			for (var i=0; i<activeRoomsByIndexArray.length; i++){
-				console.log("Active Room: "+rooms[activeRoomsByIndexArray[i]].getName());
-			}
 
 			/* to continue here*/			
 
@@ -47,9 +35,7 @@
 			window.onload = function() { 			
 				// create the Shop Front UI & populate the output table
 				populateHomeScreen();
-				updateSideBar();				
-
-
+				updateSideBar();	
 			}	
 
 		</script>	
@@ -75,7 +61,7 @@
 			
 			.navBar {
 				list-style-type: none;				
-				background-color: #F7F7F7;
+				background-color: #F7F7F7;				
 				color: #3B5998;
 				margin: 0;
 				padding: 0;
@@ -119,11 +105,24 @@
 			}
 			.homeScreenButtons {
 				width: 100%;
+				height: 100%;				
+				max-width: 200px;
+				max-height: 200px;
+				color: white;
+				background-color: #8B9DC3;
+			}
+			.roomsScreenButtons {
+				width: 100%;
 				height: 100%;
 				max-width: 200px;
 				max-height: 200px;
 				color: white;
 				background-color: #8B9DC3;
+			}			
+			.imgPower, .imgLight, .imgThermometre, .imgLock, .imgBlinds {
+				height: 20px;
+				width: 20px;
+				margin: 0px;
 			}
 		</style>				
 	</head>
@@ -136,7 +135,7 @@
 		<div class="navBar">
 			<ul>
 				<li id="home" onclick="populateHomeScreen()">Home</li>
-				<li id="rooms" onclick="createRoomSpecificControls()">Rooms</li>
+				<li id="rooms" onclick="populateRoomSpecificControls()">Rooms</li>
 				<li id="housewideControls">Housewide Controls</li>
 				<li id="cctv">CCTV</li>				
 				<li id="Settings">Settings</li>				
