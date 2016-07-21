@@ -5,45 +5,15 @@
  * YEAR: 		2016 s1
  */
 
-/* body tag selector */
-body {
-	/* values search in order stated, if neither first 2 found, common font (3rd value) selected */
-	font-family:		arial, helvetica, sans-serif;	
-
-	/* lengths and percentages */
-	font-size: 			14px;	/* px = pixel, pt = points, cm = centimeters, mm = millimeters */
-	
-	/* margins and padding to space-out elements*/	
-	/*margin:				20px;	/* spaces OUTSIDE */	
-	padding: 			0;		/* spaces INSIDE */
-	
-	/* MORE:  
-		margin-right	20px; 
-		margin-top 		20px; 
-		padding-bottom  40px; 
-		padding-top 	30px;		
-		etc. 
-	*/
-	
-	/*width: 960px;*/
-	width: 100%;
-	/*height:140px;*/
-	margin-left: auto;
-	margin-right: auto;
-	background: white;
-	/*border: 0.35em solid black;*/
-	position: relative;
-	/*text-align: center;*/
-	
-}
-/*
-#formSearch {
-    width: 800px;
-	
-}
-*/
-
-
+ body {
+ 	background-color: #DFE3EE;
+ }
+ header {
+ 	background-color:#3B5998;
+ 	color:white;
+ 	text-align:center;
+ 	padding:5px;
+ }
 /* horizontal list with effects */ 
 ul {
     list-style-type: none;
@@ -70,70 +40,143 @@ li {
 
 li:hover, li:active, li:visited {
 	background-color: rgba(0,0,255,0.3);
+} 
+/*nav {
+	line-height:30px;
+	background-color:#eeeeee;
+	height:300px;
+	width:100px;
+	float:left;
+	padding:5px; 
+	}*/
+
+.navBar {
+	list-style-type: none;				
+	background-color: #F7F7F7;				
+	color: #3B5998;
+	margin: 0;
+	padding: 0;
 }
-
-
-img {
-	/* margins and padding to space-out elements*/	
-	/* to put height and width dimensions here */
-	margin:		20px;	/* spaces OUTSIDE */	
-	padding: 	0;		/* spaces INSIDE */    
-	max-width: 	100%;
+section {
+	/*width:350px;*/				
+	float: center;
+	padding:10px; 
 }
-
-input , select {
-	margin:		5px;	/* spaces OUTSIDE */	
-	padding: 	0;		/* spaces INSIDE */    	
-}
-
-textarea {
-	color:	grey;
-	max-width: 100%;
-}
-
-#searchTextBox {
-	color:	grey;
-	max-width: 100%;
-}
-
-#usernameInput, #passwordInput {
-	position: right;
-	color:	grey;
-}
-
-#buynowImage {
-	width: /*auto*/100%;
-	height: /*auto*/100%;
-	max-width: 200px;
-	max-height: 60px;
-}	
-
-
-/*
-img[Attributes Style] {
-
-	width: 697px;
-    height: 174px;
-}
-*/
-
 footer {
-	position: absolute;
-	right: 0px;
-	padding: 10px;
-	
-  }
-  
-section  {
-	margin-left: 20px;	/* spaces OUTSIDE */	
-	padding: 10px;
-}
+	background-color:black;
+	color:white;
+	clear:both;
+	text-align:center;
+	/*text-align:right;*/
+	padding:5px; 
 
+	/*to keep it at the bottom*/
+	/*position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;*/
+}
 aside {
 	display: block;
+	float: right;						
 }
 
-#showTable {
-	margin-top: 20px;		
+#sideBar {
+	padding-right: 10px;
 }
 
+#currentStatus, #activeRooms {
+	background-color: #F7F7F7;
+	color: #3B5998;	
+
+}
+#currentStatusContent, #activeRoomContent {
+	background-color: #F7F7F7;								
+	color: #262626;
+}
+.homeScreenButtons {
+	width: 100%;
+	height: 100%;				
+	max-width: 200px;
+	max-height: 200px;
+	color: white;
+	background-color: #8B9DC3;
+}
+.roomsScreenButtons {
+	width: 100%;
+	height: 100%;
+	max-width: 200px;
+	max-height: 200px;
+	color: white;
+	background-color: #8B9DC3;
+}			
+.imgPower, .imgLight, .imgThermometre, .imgLock, .imgBlinds {
+	height: 20px;
+	width: 20px;
+	margin: 0px;
+}
+
+/* THE FOLLOWING IS FOR THE ROOM CONTROL SLIDER/SWITCH ONLY 
+ *	ref. http://www.w3schools.com/jquerymobile/tryit.asp?filename=tryjqmob_forms_select_switch
+ * ---------------------------------------------------------
+ */ 
+ /* The switch - the box around the slider */
+ .switch {
+ 	position: relative;
+ 	display: inline-block;
+ 	width: 60px;
+ 	height: 34px;
+ }
+
+ /* Hide default HTML checkbox */
+ .switch input {display:none;}
+
+ /* The slider */
+ .slider {
+ 	position: absolute;
+ 	cursor: pointer;
+ 	top: 0;
+ 	left: 0;
+ 	right: 0;
+ 	bottom: 0;
+ 	background-color: #ccc;
+ 	-webkit-transition: .4s;
+ 	transition: .4s;
+ }
+
+ .slider:before {
+ 	position: absolute;
+ 	content: "";
+ 	height: 26px;
+ 	width: 26px;
+ 	left: 4px;
+ 	bottom: 4px;
+ 	background-color: white;
+ 	-webkit-transition: .4s;
+ 	transition: .4s;
+ }
+
+ input:checked + .slider {
+ 	background-color: #2196F3;
+ }
+
+ input:focus + .slider {
+ 	box-shadow: 0 0 1px #2196F3;
+ }
+
+ input:checked + .slider:before {
+ 	-webkit-transform: translateX(26px);
+ 	-ms-transform: translateX(26px);
+ 	transform: translateX(26px);
+ }
+
+ /* Rounded sliders */
+ .slider.round {
+ 	border-radius: 34px;
+ }
+
+ .slider.round:before {
+ 	border-radius: 50%;
+ }
+ /* -------------------------end of slider/switch------------------------- */
+			

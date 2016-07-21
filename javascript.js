@@ -23,9 +23,8 @@ function createRooms(){
  *	setting some arbitrary room states for the purpose of the prototype scenario as per assignment documentation
  */
 function setSomeRoomStates(){
-	rooms[0].setLightState(true);		// switch light on in the Lounge 
-	rooms[0].setHeatingState(true);		// switch heating on in the Lounge 	
-	rooms[2].setLightState(true);		// switch light on in bathroom 1			
+	rooms[0].setLightState(true);		// switch heating on in the Lounge 
+	rooms[2].setLightState(true);		// switch the lights on in bathroom 1			
 }
 
 /* 
@@ -49,7 +48,6 @@ function populateHomeScreen() {
  */ 
 function populateRoomSpecificControls(){
 	var outputContent = "";
-
 	// create HTML buttons for each of the rooms
 	for (var i=0; i<rooms.length; i++){
 		var lineBreak = "";
@@ -65,16 +63,16 @@ function populateRoomSpecificControls(){
 function populateRoomControls(roomIndex){
 	var tempString = "";
 	var room = rooms[roomIndex];
+	//debug
+	//console.log("room = "+ room.getName());
 
 	var outputContent = "";
-	outputContent	+= "<div id='roomControlsBlock'><h2>Room Item</h2>"
+	outputContent	+="<h2>Room Item</h2>"
 					+ "<table id='roomControlStates'>"
 					+ "<tr><th></th><th></th></tr>"
-					+ "<tr><td>Lights</td><td id='lightState'></td></tr>"
-					+ "<tr><td>Heating</td><td id='heatingState'></td></tr>"
-					+ "<tr><td>Window Blinds</td><td id='blindsState'></td></tr>"					
+					+ "<tr><td>Lights</td><td id='lightState'>toggle switch here</td></tr>"
 					//+ other possible controls to go here
-					+ "</table></div>";						
+					+ "</table>";						
 
 	// update HTML content
 	document.getElementById("output").innerHTML = outputContent;
@@ -86,46 +84,22 @@ function populateRoomControls(roomIndex){
 	document.getElementById("lightState").innerHTML= tempString;	
 	if(room.getLightState()){
 		document.getElementById('lightSwitch').checked = true;
-	} else {
-		document.getElementById('lightSwitch').checked = false;
+	} else {document.getElementById('lightSwitch').checked = false;
 	}
 
-	//...heating switch
-	tempString += "<label class='switch'><input id='heatingSwitch' type='checkbox' onclick='toggleState("+roomIndex+",1)'><div class='slider round'></div></lable>"	
-	document.getElementById("heatingState").innerHTML= tempString;	
-	if(room.getHeatingState()){
-		document.getElementById('heatingSwitch').checked = true;
-	} else {
-		document.getElementById('heatingSwitch').checked = false;
-	}	
-
-	//...window blinds switch
-	tempString += "<label class='switch'><input id='blindsSwitch' type='checkbox' onclick='toggleState("+roomIndex+",2)'><div class='slider round'></div></lable>"	
-	document.getElementById("blindsState").innerHTML= tempString;	
-	if(room.getWindowBlindState()){
-		document.getElementById('blindsSwitch').checked = true;
-	} else {
-		document.getElementById('blindsSwitch').checked = false;
-	}	
-
-	/******** appliances still to do!!!	 ********/	
 }
 
 function toggleState(rmIndex,rmItemNo){
-	//debug
-	console.log("toggleState() called");	
-	console.log("rmIndex = "+rmIndex);
-	console.log("rmItemNo = "+rmItemNo);
 	var toggleSwitchID = "";
 	switch(rmItemNo) {
 		case 0: 
+			//debug
+			console.log("toggleState() called");
 			toggleSwitchID = "lightSwitch";
 			break;
 		case 1:
-			toggleSwitchID = "heatingSwitch";
 			break;
 		case 2:
-			toggleSwitchID = "blindsSwitch";
 			break;			
 		case 3:
 			break;
@@ -135,14 +109,10 @@ function toggleState(rmIndex,rmItemNo){
 
 	if(document.getElementById(toggleSwitchID).checked){
 		//then the toggle switch has just been set to on, so switch on the light
-		if(rmItemNo=0){rooms[rmIndex].setLightState(true);}
-		//else if(rmItemNo=1){rooms[rmIndex].setHeatingState(true);}
-		//else if(rmItemNo=2){rooms[rmIndex].setWindowBlindState(true);}
+		rooms[rmIndex].setLightState(true);
 	} else if(document.getElementById(toggleSwitchID).checked == false) {
 		//then the toggle switch has just been set to off, so switch off the light
-		if(rmItemNo=0){rooms[rmIndex].setLightState(false);}
-		//else if(rmItemNo=1){rooms[rmIndex].setHeatingState(false);}
-		//else if(rmItemNo=2){rooms[rmIndex].setWindowBlindState(false);}
+		rooms[rmIndex].setLightState(false);
 	}
 	updateSideBar();	
 }
@@ -194,9 +164,6 @@ function createRoom(roomName){
 	return new Room(roomName);
 }
 
-/*
- *	Class Room
- */
 function Room(roomName){
 	// properties
 	this.name = roomName; //setName(roomName);
@@ -245,17 +212,14 @@ function getActiveRooms(rooms){
  */
 function getActivities(room){
 	var outputStringHTML = "";
-	if (room.getLightState()){
-		outputStringHTML += "<img class='imgLight' src='images/light-on2.png' alt='light img'>&nbsp";
-	} 
-	if (room.getHeatingState()){
-		outputStringHTML += "<img class='imgThermometre' src='images/thermometre-up.png' alt='therm img'>&nbsp";
-	} 
-	if (room.getDoorLockState()){
-		outputStringHTML += "<img class='imgLock' src='images/lock-open.png' alt='lock img'>&nbsp";
-	} 
-	if (room.getWindowBlindState()){
-		outputStringHTML += "<img class='imgBlinds' src='images/blinds-closed.png' alt='blinds img'>&nbsp";
+	if (room.getLightState() == true){
+		outputStringHTML += "<img class='imgLight' src='images/light-on2.png' alt='light img'>&nbsp"
+	} else if (room.getHeatingState()){
+		outputStringHTML += "<img class='imgThermometre' src='images/thermometre-up.png' alt='light img'>&nbsp"
+	} else if (room.getDoorLockState()){
+		outputStringHTML += "<img class='imgLock' src='images/lock-open.png' alt='light img'>&nbsp"
+	} else if (getWindowBlindState()){
+		outputStringHTML += "<img class='imgBlinds' src='images/blinds-closed.png' alt='light img'>&nbsp"
 	} 
 	return outputStringHTML;
 }
