@@ -34,6 +34,7 @@
 	/*border-color: #B3B3B3;	
 	border-width: 1px;	*/
 	border: 1px solid #D3D3D3;	
+	border-radius: 10px;	/*rounded border corners*/	
 }
 #navBar li{
 	float: left;
@@ -67,6 +68,7 @@
 	/*float: right;*/
 	margin-left: 205px;
 	border: 1px solid #D3D3D3;
+	border-radius: 10px;	/*rounded border corners*/	 		
 }
 #section {
 	/*width:350px;*/				
@@ -85,6 +87,7 @@
 	padding-top: 15px;	
 	margin-top: 20px;
 	margin-left: 20px;
+	border-radius: 10px;	/*rounded border corners*/	 			
 }
 #roomControlItems {
 	padding-left: 20px;
@@ -103,6 +106,7 @@
 	height: 600px;
 	background-color: #F7F7F7;	
 	border: 1px solid #D3D3D3;
+	border-radius: 10px;	/*rounded border corners*/	 				
 }
 
 #currentStatusContainer {
@@ -137,17 +141,15 @@
 	width: 20px;
 	margin: 0px;
 }
-#footer {
+#footer {	
 	position: fixed;
 	bottom: 5px;
 	width: 100%;	
-
 	background-color: #3B5998;
 	color:white;
-	clear:both;
+	/*clear:both;*/
 	text-align:center;
-	/*text-align:right;*/
-	padding:5px; 
+	padding:5px;
 }
 /* THE FOLLOWING IS FOR THE ROOM CONTROL SLIDER/SWITCH ONLY 
  *	ref. http://www.w3schools.com/jquerymobile/tryit.asp?filename=tryjqmob_forms_select_switch
