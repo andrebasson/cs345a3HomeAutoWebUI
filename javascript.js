@@ -5,8 +5,6 @@
  * YEAR: 		2016 s1
  */
 
-//var rooms = new Array();
-
 /*
  * creating some arbitrary rooms for the purpose of the prototype scenario as per assignment documentation
  */
@@ -17,6 +15,10 @@ function createRooms(){
 	rooms.push(createRoom('Bathroom 2'));
 	rooms.push(createRoom('Bedroom 1'));
 	rooms.push(createRoom('Bedroom 2'));
+}
+
+function createRoom(roomName){
+	return new Room(roomName);
 }
 
 /*
@@ -158,10 +160,6 @@ function appliance(name){
 	this.setName = function(name){this.name = name};
 	this.getState = function(){return this.stateOn};
 	this.setState = function(state){this.StateOn = state};
-}
-
-function createRoom(roomName){
-	return new Room(roomName);
 }
 
 function Room(roomName){
