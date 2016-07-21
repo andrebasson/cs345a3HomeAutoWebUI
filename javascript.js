@@ -40,7 +40,7 @@ function populateHomeScreen() {
 					+ "<input class='homeScreenButtons' type='button' name='settings'"
 					+ "value='Settings'></input>";					
 	document.getElementById("output").innerHTML = outputContent;
-	document.getElementById("heading").innerHTML = "Liz's House";
+	document.getElementById("heading").innerHTML = "Home";
 }
 
 /* 
@@ -51,7 +51,7 @@ function populateRoomSpecificControls(){
 	// create HTML buttons for each of the rooms
 	for (var i=0; i<rooms.length; i++){
 		var lineBreak = "";
-		if (i%3==0){lineBreak="<br>"};
+		if (i%3==0 && i!=0){lineBreak="<br>"};
 		var roomName = rooms[i].getName();
 		outputContent += lineBreak+"<input class='roomsScreenButtons' type='button' name='"+roomName+"'"
 							+"value='"+roomName+"' onclick='populateRoomControls("+i+")'></input>";
@@ -67,12 +67,12 @@ function populateRoomControls(roomIndex){
 	//console.log("room = "+ room.getName());
 
 	var outputContent = "";
-	outputContent	+="<h2>Room Item</h2>"
+	outputContent	+="<div id='roomControlItems'><span style='color:#3B5998'><h3>Room Items</h3></span>"
 					+ "<table id='roomControlStates'>"
 					+ "<tr><th></th><th></th></tr>"
-					+ "<tr><td>Lights</td><td id='lightState'>toggle switch here</td></tr>"
+					+ "<tr><td><span style='color: #8C8C8C'>Lights</span></td><td id='lightState'></td></tr>"
 					//+ other possible controls to go here
-					+ "</table>";						
+					+ "</table></div>";						
 
 	// update HTML content
 	document.getElementById("output").innerHTML = outputContent;
@@ -124,17 +124,17 @@ function toggleState(rmIndex,rmItemNo){
 function updateSideBar(){	
 	var currentStatus = getCurrentStatus();
 	var currentStatusDiv = document.getElementById("currentStatusContent");	
-	currentStatusDiv.innerHTML = "<strong>Alarms</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+currentStatus[0]+"<br>"
-								+"<strong>Doors</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+currentStatus[1]+"<br>"
-								+"<strong>Energy</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+currentStatus[2]+"<br>"
-								+"<strong>Temp</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+currentStatus[3];
+	currentStatusDiv.innerHTML = "<span style='color:#3B5998'>Alarms</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+currentStatus[0]+"<br>"
+								+"<span style='color:#3B5998'>Doors</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+currentStatus[1]+"<br>"
+								+"<span style='color:#3B5998'>Energy</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+currentStatus[2]+"<br>"
+								+"<span style='color:#3B5998'>Temp</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+currentStatus[3];
 	
 	var activeRoomsByIndexArray = getActiveRooms(rooms);
 	var activeRoomsOutput = "";
 	for (var i=0; i<activeRoomsByIndexArray.length; i++){		
 		//console.log("Active Room: "+rooms[activeRoomsByIndexArray[i]].getName());
 		var activeRoom = rooms[activeRoomsByIndexArray[i]];
-		activeRoomsOutput += "<strong>"+activeRoom.getName()+"</strong>"+getActivities(activeRoom)+"<br>";
+		activeRoomsOutput += "<span style='color:#3B5998'>"+activeRoom.getName()+"</span>"+getActivities(activeRoom)+"<br>";
 	}
 	document.getElementById("activeRoomContent").innerHTML=activeRoomsOutput;
 }
