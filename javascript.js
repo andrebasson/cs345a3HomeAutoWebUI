@@ -5,6 +5,28 @@
  * YEAR: 		2016 s1
  */
 
+//var rooms = new Array();
+
+/*
+ * creating some arbitrary rooms for the purpose of the prototype scenario as per assignment documentation
+ */
+function createRooms(){
+	rooms.push(createRoom('Lounge'));
+	rooms.push(createRoom('Kitchen'));
+	rooms.push(createRoom('Bathroom 1'));
+	rooms.push(createRoom('Bathroom 2'));
+	rooms.push(createRoom('Bedroom 1'));
+	rooms.push(createRoom('Bedroom 2'));
+}
+
+/*
+ *	setting some arbitrary room states for the purpose of the prototype scenario as per assignment documentation
+ */
+function setSomeRoomStates(){
+	rooms[0].setHeatingState(true);		// switch heating on in the Lounge 
+	rooms[2].setLightState(true);		// switch the lights on in bathroom 1			
+}
+
 /* 
  * populateHomeScreen() populates the home screen content (4 buttons) and header
  */ 
@@ -25,6 +47,7 @@ function populateHomeScreen() {
  * populateRoomSpecificControlsScreen() populates the 'rooms' screen content (4 buttons) and header
  */ 
 function populateRoomSpecificControls(){
+/*	DELETE WHEN READY - the code below works
 	var outputContent = "<input class='roomsScreenButtons' type='button' name='lng'"
 					+ "value='Lounge'></input>"
 					+ "<input class='roomsScreenButtons' type='button' name='ktn'"
@@ -37,8 +60,65 @@ function populateRoomSpecificControls(){
 					+ "value='Bedroom 1'></input>"
 					+ "<input class='roomsScreenButtons' type='button' name='bdrm2'"
 					+ "value='Bedroom 2'></input>";					
+*/
+	var outputContent = "";
+	// create HTML buttons for each of the rooms
+	for (var i=0; i<rooms.length; i++){
+		var lineBreak = "";
+		if (i%3==0){lineBreak="<br>"};
+		var roomName = rooms[i].getName();
+		outputContent += lineBreak+"<input class='roomsScreenButtons' type='button' name='"+roomName+"'"
+							+"value='"+roomName+"' onclick='populateRoomControls("+i+")'></input>";
+	}
 	document.getElementById("output").innerHTML = outputContent;
 	document.getElementById("heading").innerHTML = "Rooms";
+}
+
+function populateRoomControls(roomIndex){
+	var tempString = "";
+	var room = rooms[roomIndex];
+	//debug
+	//console.log("room = "+ room.getName());
+
+	var outputContent = "";
+	outputContent	+= "<table id='roomControlStates'>"
+					+ "<tr><th></th><th></th></tr>"
+					+ "<tr><td>Lights</td><td id='lightState'>toggle switch here</td></tr>"
+					+ "<tr><td>Blinds</td><td id='blindsState'>toggle switch here</td></tr>"
+					//+ other possible controls to go here
+					+ "</table>";						
+
+	// update HTML content
+	document.getElementById("output").innerHTML = outputContent;
+	document.getElementById("heading").innerHTML = ""+room.getName();
+	
+	// update HTML toggle switches
+	//...light switch
+	if(room.getLightState()){
+		tempString += "<label class='switch'><input type='checkbox' checked><div class='slider round'></div></lable>"
+	} else {
+		tempString += "<label class='switch'><input type='checkbox'><div class='slider round'></div></lable>"
+	}
+	document.getElementById("lightState").innerHTML= tempString;	
+
+	//...window blinds switch
+	if(room.getWindowBlindState()){
+		tempString += "<label class='switch'><input id='lightSwitch' type='checkbox' checked><div class='slider round'></div></lable>"
+	} else {
+		tempString += "<label class='switch'><input id='lightSwitch' type='checkbox'><div class='slider round'></div></lable>"	
+	}
+	document.getElementById("blindsState").innerHTML= tempString;		
+
+	/******** still to make toggle switches active onclick; so that we can update room status and side bar *****/
+	if(){
+		room.setLightState(false);
+	}
+
+
+	/******** appliances still to do!!!	 ********/
+
+	//update side bar
+	updateSideBar();
 }
 
 
